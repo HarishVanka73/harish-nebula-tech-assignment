@@ -1,0 +1,17 @@
+Challenging Incident in Production (AWS/Kubernetes)
+
+One major incident I handled was when a backend microservice deployed on EKS kept going into CrashLoopBackOff during peak traffic.
+
+Troubleshooting steps/tools:
+
+Used kubectl logs and kubectl describe pod to identify OOMKilled errors caused by insufficient memory requests/limits.
+
+Checked application metrics in Prometheus/Grafana dashboards to confirm spikes in memory usage.Analyzed pod lifecycle with kubectl get events and correlated with CloudWatch logs.
+
+Resolution & MTTR reduction:
+
+Tuned resource requests/limits in the Deployment manifest.
+
+Connect with Developers for application leaks memory so to take heap dump and applied Horizontal Pod Autoscaler (HPA) to handle traffic surges automatically.
+
+Added alerts in CloudWatch and Grafana for memory/cpu thresholds to catch issues earlier.MTTR was reduced significantly since we standardized a runbook for pod debugging and integrated alerting with Jira for faster response.
