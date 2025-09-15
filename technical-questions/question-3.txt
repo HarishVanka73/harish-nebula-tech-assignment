@@ -1,1 +1,23 @@
+Infrastructure as Code (Terraform at Scale)
 
+I automated AWS infra provisioning using Terraform with modular architecture
+
+Root module for all child modules.
+
+Child modules for VPC, subnets, NAT/IGW, EKS, RDS MySQL, Bastion, ALB, IAM roles.
+
+Remote state in S3 with DynamoDB locking for team collaboration.
+
+Problems Solved:
+
+For consistency same Terraform code used across environments, reducing drift.
+
+For scalability easier to spin up new EKS clusters and existing node groups to scale or RDS instances across AZs.
+
+For speed reduced manual setup time from days to under an hour for a full environment.
+
+Enhancements:
+
+Added lifecycle rules to avoid accidental resource deletions.
+
+Used dynamic blocks for security group rules and node groups.
