@@ -1,0 +1,27 @@
+2. CI/CD Pipelines (Building & Optimization)
+
+
+I designed and optimized Jenkins multi-stage pipelines for our microservices running on AWS:
+
+Pipeline Stages & Tools:
+Code checkout → Maven build/test (unit + integration) → SonarQube analysis → OWASP/Trivy security scans → Docker build & push to ECR → Update Helm values in GitOps repo → ArgoCD auto-sync to EKS.
+
+Optimizations:
+
+Configured parallel stages for faster builds (security scans + tests).
+
+Implemented caching of Maven .m2 repo on EC2 agents to reduce build times.
+
+Rollback Strategy:
+
+Used Helm versioning + ArgoCD rollback to quickly revert to a stable release.
+
+Maintained Docker image tags with build number + commit hash for easy rollback.
+
+Security & Observability Integrations:
+
+Integrated SonarQube, OWASP, Trivy in pipelines.
+
+Configured Fluent Bit DaemonSet → CloudWatch for log centralization.
+
+check the console output for build failures
